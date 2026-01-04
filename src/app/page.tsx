@@ -1,10 +1,23 @@
+'use client'
+
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useEffect, useState } from "react";
+import Header from "../../components/header";
 
 export default function Home() {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:3001/posts').then(res => res.json().then(d => setData(d)))
+  }, [])
+
+  console.log(data)
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <Header />
         <Image
           className={styles.logo}
           src="/next.svg"
